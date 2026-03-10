@@ -192,9 +192,16 @@ export default function UploadPage() {
 
             {/* Image result card */}
             {imageResult && (
-                <section className="rounded-2xl bg-slate-900/60 border border-green-500/20 p-6 space-y-4">
+                <section className="rounded-2xl bg-slate-900/60 border border-green-500/20 p-6 space-y-4 shadow-sm">
                     <h2 className="text-base font-semibold text-white">Image Detection Result</h2>
-                    <BoxCounter count={imageResult.box_count} label="Boxes Detected" showPulse />
+
+                    {imageResult.box_count === 0 ? (
+                        <div className="bg-orange-900/40 border border-orange-500/30 text-orange-200 p-4 rounded-xl text-center font-medium text-lg shadow-inner">
+                            There are no boxes in this image.
+                        </div>
+                    ) : (
+                        <BoxCounter count={imageResult.box_count} label="Boxes Detected" showPulse />
+                    )}
                     <div className="grid grid-cols-2 gap-3 text-sm">
                         <div className="bg-slate-800/50 rounded-xl p-3">
                             <div className="text-slate-500 text-xs mb-1">Dimensions</div>
@@ -216,21 +223,28 @@ export default function UploadPage() {
 
             {/* Video result card */}
             {videoResult && (
-                <section className="rounded-2xl bg-slate-900/60 border border-green-500/20 p-6 space-y-4">
+                <section className="rounded-2xl bg-slate-900/60 border border-green-500/20 p-6 space-y-4 shadow-sm">
                     <h2 className="text-base font-semibold text-white">Video Detection Result</h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
-                        {[
-                            { label: "Total Boxes", value: videoResult.total_boxes_detected, color: "text-green-300" },
-                            { label: "Frames Processed", value: videoResult.frames_processed, color: "text-blue-300" },
-                            { label: "Peak Count", value: videoResult.peak_count, color: "text-pink-300" },
-                            { label: "Avg / Frame", value: videoResult.average_boxes_per_frame.toFixed(2), color: "text-yellow-300" },
-                        ].map(({ label, value, color }) => (
-                            <div key={label} className="bg-slate-800/50 rounded-xl p-4 text-center">
-                                <div className={`text-3xl font-extrabold tabular-nums ${color}`}>{value}</div>
-                                <div className="text-slate-500 text-xs mt-1 uppercase tracking-wide">{label}</div>
-                            </div>
-                        ))}
-                    </div>
+
+                    {videoResult.total_boxes_detected === 0 ? (
+                        <div className="bg-orange-900/40 border border-orange-500/30 text-orange-200 p-6 rounded-xl text-center font-medium text-lg shadow-inner">
+                            There are no boxes in this video.
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+                            {[
+                                { label: "Total Boxes", value: videoResult.total_boxes_detected, color: "text-green-300" },
+                                { label: "Frames Processed", value: videoResult.frames_processed, color: "text-blue-300" },
+                                { label: "Peak Count", value: videoResult.peak_count, color: "text-pink-300" },
+                                { label: "Avg / Frame", value: videoResult.average_boxes_per_frame.toFixed(2), color: "text-yellow-300" },
+                            ].map(({ label, value, color }) => (
+                                <div key={label} className="bg-slate-800/50 rounded-xl p-4 text-center">
+                                    <div className={`text-3xl font-extrabold tabular-nums ${color}`}>{value}</div>
+                                    <div className="text-slate-500 text-xs mt-1 uppercase tracking-wide">{label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                     {videoResult.document_id && (
                         <p className="text-slate-600 text-xs">
                             Session saved to Firebase · ID: <code className="text-slate-500">{videoResult.document_id}</code>

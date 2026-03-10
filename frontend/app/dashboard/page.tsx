@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import BoxCounter from "@/components/BoxCounter";
-import AnalyticsChart from "@/components/AnalyticsChart";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import { fetchStats, healthCheck } from "@/lib/api";
 import type { DetectionSession } from "@/lib/api";
 import Link from "next/link";
+
+const AnalyticsChart = dynamic(() => import("@/components/AnalyticsChart"), { ssr: false, loading: () => <div className="h-48 animate-pulse bg-slate-800/40 rounded-xl" /> });
 
 export default function DashboardPage() {
     const [sessions, setSessions] = useState<DetectionSession[]>([]);

@@ -7,7 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BoxDetection System",
+  title: "AI-powered industrial monitoring platform",
   description:
     "Real-time AI-powered box detection and counting using YOLOv8 for industrial automation.",
   icons: {
@@ -18,6 +18,13 @@ export const metadata: Metadata = {
 const navLinks = [
   { href: "/dashboard", label: "Dashboard", icon: "🖥️" },
   { href: "/upload", label: "Upload & Detect", icon: "📤" },
+  { href: "/inventory-mismatch", label: "Inventory Alert", icon: "⚠️" },
+  { href: "/heatmap", label: "Detection Heatmap", icon: "🔥" },
+  { href: "/confidence", label: "Confidence Control", icon: "🎯" },
+  { href: "/replay", label: "Session Replay", icon: "▶️" },
+  { href: "/reports", label: "Detection Reports", icon: "📊" },
+  { href: "/comparison", label: "Session Comparison", icon: "📈" },
+  { href: "/anomaly", label: "Anomaly Alerts", icon: "🧠" },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -30,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-800">
             <span className="text-2xl">📦</span>
             <div>
-              <p className="font-bold text-white text-sm leading-tight">BoxDetection System</p>
+              <p className="font-bold text-white text-sm leading-tight">AI-powered industrial monitoring platform</p>
               <p className="text-slate-500 text-xs"></p>
             </div>
           </div>
@@ -51,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* Footer */}
           <div className="px-6 py-4 border-t border-slate-800">
-            <p className="text-slate-600 text-xs">v1.0.0</p>
+            <p className="text-slate-600 text-xs"></p>
           </div>
         </aside>
 

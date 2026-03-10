@@ -14,6 +14,9 @@ load_dotenv()
 
 from app.models.yolov8_model import get_model
 from app.routes.detect import router as detect_router
+from app.routes.config import router as config_router
+from app.routes.report import router as report_router
+from app.routes.anomaly import router as anomaly_router
 
 
 @asynccontextmanager
@@ -50,6 +53,9 @@ app.add_middleware(
 
 # ── Routers ───────────────────────────────────────────────────────────────────
 app.include_router(detect_router, tags=["Detection"])
+app.include_router(config_router, tags=["Config"])
+app.include_router(report_router, tags=["Reports"])
+app.include_router(anomaly_router, tags=["Anomaly"])
 
 
 # ── Root ──────────────────────────────────────────────────────────────────────

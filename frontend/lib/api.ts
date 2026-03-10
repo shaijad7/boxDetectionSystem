@@ -142,3 +142,47 @@ export async function healthCheck(): Promise<{ status: string }> {
     if (!res.ok) throw new Error("Backend is unavailable.");
     return res.json();
 }
+
+/**
+ * Update the YOLO inference confidence threshold on the backend.
+ */
+export async function updateConfidenceThreshold(value: number): Promise<void> {
+    const res = await fetch(`${BASE_URL}/detect/config`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ confidence_threshold: value }),
+    });
+    if (!res.ok) throw new Error("Failed to update confidence threshold.");
+}
+
+/**
+ * Fetch the current backend inference config.
+ */
+export async function fetchConfig(): Promise<{ confidence_threshold: number }> {
+    const res = await fetch(`${BASE_URL}/detect/config`, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to fetch config.");
+    return res.json();
+}
+
+/**
+ * Download a PDF session report as a Blob.
+ */
+export async function generateReport(sessionId: string): Promise<Blob> {
+    const res = await fetch(`${BASE_URL}/report/${sessionId}`);
+    if (!res.ok) throw new Error("Failed to generate report.");
+    return res.blob();
+}
+
+/**
+ * Check for anomalies across recent detection sessions.
+ */
+export async function fetchAnomalyCheck(): Promise<{
+    anomalies: Array<{ type: string; message: string; average: number; current: number }>;
+    average: number;
+    current: number;
+    session_count: number;
+}> {
+    const res = await fetch(`${BASE_URL}/anomaly/check`, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to run anomaly check.");
+    return res.json();
+}

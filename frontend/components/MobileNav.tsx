@@ -7,8 +7,15 @@ export default function MobileNav() {
     const pathname = usePathname();
 
     const navLinks = [
-        { href: "/dashboard", label: "Dashboard", icon: "🖥️" },
+        { href: "/dashboard", label: "Home", icon: "🖥️" },
         { href: "/upload", label: "Detect", icon: "📤" },
+        { href: "/inventory-mismatch", label: "Inventory", icon: "⚠️" },
+        { href: "/heatmap", label: "Heatmap", icon: "🔥" },
+        { href: "/confidence", label: "Conf", icon: "🎯" },
+        { href: "/replay", label: "Replay", icon: "▶️" },
+        { href: "/reports", label: "Reports", icon: "📊" },
+        { href: "/comparison", label: "Compare", icon: "📈" },
+        { href: "/anomaly", label: "Anomaly", icon: "🧠" },
     ];
 
     return (
@@ -22,8 +29,8 @@ export default function MobileNav() {
                             key={href}
                             href={href}
                             className={`flex flex-col items-center justify-center w-20 h-14 rounded-2xl transition-all duration-200 ${isActive
-                                    ? "text-green-400 bg-slate-800/50"
-                                    : "text-slate-500 hover:text-slate-300 hover:bg-slate-800/30"
+                                ? "text-green-400 bg-slate-800/50"
+                                : "text-slate-500 hover:text-slate-300 hover:bg-slate-800/30"
                                 }`}
                         >
                             <span className={`text-xl mb-0.5 ${isActive ? "scale-110 drop-shadow-[0_0_8px_rgba(74,222,128,0.4)]" : "scale-100"} transition-all duration-300`}>
